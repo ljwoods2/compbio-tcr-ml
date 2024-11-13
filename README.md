@@ -5,8 +5,6 @@
 ```bash
 module load mamba
 source activate pytorch-gpu-2.3.1-cuda-12.1
-
-
 ```
 
 
