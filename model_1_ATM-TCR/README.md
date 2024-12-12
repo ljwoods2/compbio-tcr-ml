@@ -42,32 +42,8 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 
 ```
 
-Combine data for modified epi split
+Training & testing:
 ```bash
-cat provided_data/train.csv fold0/train.csv fold1/train.csv \
-    fold2/train.csv fold3/train.csv \
-    fold4/train.csv fold5/train.csv \
-    fold6/train.csv fold7/train.csv \
-    fold8/train.csv fold9/train.csv > train.csv
-
-cat provided_data/test.csv fold0/test.csv fold1/test.csv \
-    fold2/test.csv fold3/test.csv \
-    fold4/test.csv fold5/test.csv \
-    fold6/test.csv fold7/test.csv \
-    fold8/test.csv fold9/test.csv > test.csv
-
-```
-
-Ensure test data has a prediciton (which will be ignored)
-
-```bash
-input_file = "tcr_split_test.csv"
-input_file = "epitope_split_test.csv"
-output_file = "output.csv"
-
-with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
-    for line in infile:
-        line = line.strip()  # Remove existing newlines or spaces
-        if line:  # Skip empty lines
-            outfile.write(f"{line},1\n")
+cd ATM-TCR
+./train_test.sh
 ```
