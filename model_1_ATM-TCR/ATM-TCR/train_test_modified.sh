@@ -21,13 +21,31 @@ CUDA_VISIBLE_DEVICES=0 /home/ljwoods2/.conda/envs/atm-tcr/bin/python main.py \
     --model_name tcr_split
 
 CUDA_VISIBLE_DEVICES=0 /home/ljwoods2/.conda/envs/atm-tcr/bin/python main.py \
-    --indepfile /home/ljwoods2/workspace/compbio/ml/model_1_ATM-TCR/test.csv \
-    --infile /home/ljwoods2/workspace/compbio/ml/model_1_ATM-TCR/test.csv \
+    --indepfile /scratch/ljwoods2/data/BAP/epi_split/test.csv \
+    --infile /scratch/ljwoods2/data/BAP/epi_split/test.csv \
     --model_name epi_eplit_modified.ckpt \
     --mode test
 
 CUDA_VISIBLE_DEVICES=0 /home/ljwoods2/.conda/envs/atm-tcr/bin/python main.py \
     --indepfile /scratch/ljwoods2/data/BAP/tcr_split/test.csv \
     --infile /scratch/ljwoods2/data/BAP/tcr_split/test.csv \
+    --model_name tcr_split.ckpt \
+    --mode test
+
+CUDA_VISIBLE_DEVICES=0 /home/ljwoods2/.conda/envs/atm-tcr/bin/python main.py \
+    --indepfile /home/ljwoods2/workspace/compbio/ml/model_1_ATM-TCR/epitope_split_test.csv \
+    --infile /home/ljwoods2/workspace/compbio/ml/model_1_ATM-TCR/epitope_split_test.csv \
+    --model_name epi_eplit.ckpt \
+    --mode test
+
+CUDA_VISIBLE_DEVICES=0 /home/ljwoods2/.conda/envs/atm-tcr/bin/python main.py \
+    --indepfile /home/ljwoods2/workspace/compbio/ml/model_1_ATM-TCR/epitope_split_test.csv \
+    --infile /home/ljwoods2/workspace/compbio/ml/model_1_ATM-TCR/epitope_split_test.csv \
+    --model_name epi_eplit_modified.ckpt \
+    --mode test
+
+CUDA_VISIBLE_DEVICES=0 /home/ljwoods2/.conda/envs/atm-tcr/bin/python main.py \
+    --indepfile /home/ljwoods2/workspace/compbio/ml/model_1_ATM-TCR/tcr_split_test.csv \
+    --infile /home/ljwoods2/workspace/compbio/ml/model_1_ATM-TCR/tcr_split_test.csv \
     --model_name tcr_split.ckpt \
     --mode test

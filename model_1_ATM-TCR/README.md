@@ -55,4 +55,19 @@ cat provided_data/test.csv fold0/test.csv fold1/test.csv \
     fold4/test.csv fold5/test.csv \
     fold6/test.csv fold7/test.csv \
     fold8/test.csv fold9/test.csv > test.csv
+
+```
+
+Ensure test data has a prediciton (which will be ignored)
+
+```bash
+input_file = "tcr_split_test.csv"
+input_file = "epitope_split_test.csv"
+output_file = "output.csv"
+
+with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
+    for line in infile:
+        line = line.strip()  # Remove existing newlines or spaces
+        if line:  # Skip empty lines
+            outfile.write(f"{line},1\n")
 ```
