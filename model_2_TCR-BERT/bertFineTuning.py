@@ -5,8 +5,9 @@ import torch
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 import numpy as np
 from transformers import pipeline
+import wandb
 
-pipe = pipeline("text-classification", model="wukevin/tcr-bert")
+pipe = pipeline("text-classification", model="wukevin/tcr-bert", device=0)
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
@@ -19,8 +20,8 @@ def process(input):
     
     return res[:-1]
 
-df_train = pd.read_csv('tcrSplit/train.csv', header=None, names=['peptide', 'tcr_sequence', 'label'])
-df_test = pd.read_csv('tcrSplit/test.csv', header=None, names=['peptide', 'tcr_sequence', 'label'])
+df_train = pd.read_csv('epiSplit/train.csv', header=None, names=['peptide', 'tcr_sequence', 'label'])
+df_test = pd.read_csv('epiSplit/test.csv', header=None, names=['peptide', 'tcr_sequence', 'label'])
 df_train['label'] = df_train['label'].astype(int)
 df_test['label'] = df_test['label'].astype(int)
 
@@ -88,7 +89,7 @@ def compute_metrics(eval_pred):
 
 training_args = TrainingArguments(
     output_dir='./results',
-    num_train_epochs=5,  
+    num_train_epochs=10,  
     per_device_train_batch_size=32,  
     learning_rate=5e-5,  
     warmup_steps=900,  
@@ -99,8 +100,9 @@ training_args = TrainingArguments(
     # save_total_limit=2,  
     load_best_model_at_end=True, 
     metric_for_best_model="accuracy",
-    report_to=[],
+    report_to=["wandb"],
 )
+wandb.init(project="bert_epi_split", name="experiment_name", config=training_args.to_dict())
 trainer = Trainer(
     model=model,                                
     args=training_args,                         
@@ -110,8 +112,7 @@ trainer = Trainer(
 )
 
 trainer.train()
-trainer.save_model('./wukevin_tcr_bert_model')
+trainer.save_model('./bert_EPI_Split')
 
 # test_results = trainer.evaluate(tokenized_datasets['test'])
 # print(test_results) 
-
